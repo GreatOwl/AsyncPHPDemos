@@ -1,0 +1,221 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Async Research",
+		"_postman_id": "01fd0e0a-ce62-69c0-4eba-f3808956ce21",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Async Demos",
+			"description": "These are the demonstrations featured in my presentation at QL tech con.",
+			"item": [
+				{
+					"name": "Synchronous Single Curl",
+					"request": {
+						"url": "http://async.dev:8000/synchronousSingleCurl",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Lazy Load Curl",
+					"request": {
+						"url": "http://async.dev:8000/lazyLoadSingleCurl",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Synchronous Double Curl",
+					"request": {
+						"url": "http://async.dev:8000/synchronousDoubleCurl",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Asynchronous Curl",
+					"request": {
+						"url": "http://async.dev:8000/asynchronousCurl",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "guzzle Async Curl",
+					"request": {
+						"url": "http://async.dev:8000/guzzleHttpCurl",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "react Async Socket",
+					"request": {
+						"url": "http://async.dev:8000/reactHttpSocket",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "mixed Async Clients",
+					"request": {
+						"url": "http://async.dev:8000/mixedClient",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "procedural blocking",
+					"request": {
+						"url": "http://async.dev:8000/proceduralBlocking",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Async Model",
+					"request": {
+						"url": "http://async.dev:8000/asyncModel",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Collection Blocking",
+					"request": {
+						"url": "http://async.dev:8000/collectionBlocking",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Collection Non Blocking",
+					"request": {
+						"url": "http://async.dev:8000/collectionNonBlocking",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "coroutines",
+					"request": {
+						"url": "http://async.dev:8000/coroutines",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Producer",
+					"request": {
+						"url": "http://async.dev:8000/addMessages/500",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "consumer status",
+					"request": {
+						"url": "http://async.dev:8000/statusConsumers",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "start consumers",
+					"request": {
+						"url": "http://async.dev:8000/startConsumers/50",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cut",
+			"description": "These were cut from the demonstration as I didn't feel they added significant benefit to my message.",
+			"item": [
+				{
+					"name": "Async Model Blocking",
+					"request": {
+						"url": "http://async.dev:8000/asyncModelBlocking",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Async Model Lazy Loading",
+					"request": {
+						"url": "http://async.dev:8000/asyncModelLazyLoading",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "stop consumers",
+					"request": {
+						"url": "http://async.dev:8000/stopConsumers",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

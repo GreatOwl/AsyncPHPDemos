@@ -1,0 +1,77 @@
+version: '2'
+services:
+    nginx:
+        build:
+            context: ./docker/nginx
+        volumes_from:
+            - data
+        depends_on:
+            - data
+        container_name: nginx
+        restart: always
+        ports:
+            - "8000:80"
+            - "4430:443"
+        stdin_open: true
+        privileged: true
+        tty: true
+        command:
+            - nginx
+
+    async:
+        build:
+            context: ./docker/php
+        volumes_from:
+            - data
+        depends_on:
+            - data
+        container_name: async
+        environment:
+            - ROOT=/config
+            - CENTRAL=async
+            - PREFIX=a
+            - PROJECT=sync
+        restart: always
+        working_dir: /config/async
+        stdin_open: true
+        privileged: true
+        links:
+            - "nginx:request.dev"
+        tty: true
+
+    request:
+        build:
+            context: ./docker/php
+        volumes_from:
+            - data
+        depends_on:
+            - data
+        container_name: request
+        environment:
+            - ROOT=/config
+            - CENTRAL=async
+            - PREFIX=a
+            - PROJECT=sync
+        restart: always
+        working_dir: /config/async
+        stdin_open: true
+        privileged: true
+        tty: true
+
+    redis:
+        image: tutum/redis
+        container_name: redis
+        ports:
+            - "6379:6379"
+        environment:
+            REDIS_PASS: '**None**'
+            REDIS_APPENDFSYNC: 'always'
+
+    data:
+        image: busybox
+        container_name: data
+        volumes:
+            - .:/config/async
+            - ./logs/nginx:/config/log/nginx
+            - ./configuration/vm/development.conf:/config/configs/development.conf
+        stdin_open: true

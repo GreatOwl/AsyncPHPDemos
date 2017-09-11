@@ -1,0 +1,28 @@
+{
+    "name": "async/demo",
+    "description": "",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Async\\Demo\\": "src"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "require": {
+        "php": ">=7.1.0",
+        "amphp/amp": "^2.0.0",
+        "psr/cache": "^1.0",
+        "psr/simple-cache": "^1.0",
+        "slim/slim": ">=3.4",
+        "guzzlehttp/guzzle" : "6.*",
+        "php-http/message": "^1.0",
+        "php-http/httplug": "^1.0",
+        "php-http/discovery": "^1.0",
+        "php-http/guzzle6-adapter": "^1.0",
+        "php-http/react-adapter": "^1.0",
+        "cache/predis-adapter": "^1.0",
+        "cache/simple-cache-bridge": "^1.0"
+    }
+}

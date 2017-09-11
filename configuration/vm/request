@@ -1,0 +1,35 @@
+server {
+    server_name        request.dev;
+        error_log          /config/async/logs/error.log warn;
+        access_log         /config/async/logs/access.log main;
+        log_subrequest     on;
+
+        root               /config/async/public;
+        index              index.php;
+
+        location / {
+            set            $original_query_string            $query_string;
+            set            $redirect_url                     $request_uri;
+            try_files      $uri /index.php;
+        }
+
+        location ~* \.php$ {
+            root                          /config/async/public;
+            set                           $redirect_url                     $request_uri;
+            if ($request_uri ~ (/.*)(/)?\?.+)
+            {
+                    set                   $redirect_url                     $1;
+            }
+            try_files                     $uri /index.php.php =404;
+            include                       /etc/nginx/fastcgi_params;
+            fastcgi_index                 index.php;
+            fastcgi_buffer_size           128k;
+            fastcgi_buffers               256             16k;
+            fastcgi_pass                  async:9000;
+        }
+
+        location ~* \.(ico|css|js|gif|jpe?g|png) {
+            expires        max;
+            log_not_found  off;
+        }
+}
