@@ -1,3 +1,7 @@
+# Before we begin
+
+[Checkout this list of async PHP projects when you are ready to do you're own experimentation](https://github.com/elazar/asynchronous-php)
+
 # Try out some async PHP!
 
 ## Environment
