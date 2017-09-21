@@ -32,6 +32,13 @@ class ExtractionLoader
         return $this->parser->parse($rawData);
     }
 
+    public function getExtractionParser()
+    {
+        return function($data) {
+            return $this->extract($data);
+        };
+    }
+
     /**
      * @param array $rawData
      * @param array $handlers

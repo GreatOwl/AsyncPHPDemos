@@ -11,21 +11,24 @@ class Data implements AccessInterface
 
     /** @var ExtractionLoader $extractionLoader */
     private $extractionLoader;
-    private $data;
-
-    private $rawData;
-
-    protected $loader;
 
     protected $handlers;
 
+    private $rawData;
+    private $data;
+
     private $loaded = false;
+    private $extractionLoaded = false;
 
     public function __construct($data = [], ExtractionLoader $extractionLoader = null, $handlers = [])
     {
         $this->rawData = $data;
-        $this->extractionLoader = $extractionLoader;
         $this->handlers = $handlers;
+        if (!is_null($extractionLoader) && !$this->extractionLoaded) {
+            $this->extractionLoader = $extractionLoader;
+            $this->handlers[] = $this->extractionLoader->getExtractionParser();
+            $this->extractionLoaded = true;
+        }
     }
 
     public function serialize()
@@ -45,10 +48,25 @@ class Data implements AccessInterface
      */
     public function withLoader(callable $loader): AccessInterface
     {
-        /** @var AccessInterface $data */
-        $this->loader = $loader;
+        $handlers = $this->handlers;
+        $handlers[] = function ($data) use ($loader) {
+            if (!$this->loaded) {
+                $data = $loader($data);
+                $this->loaded = true;
+            }
+            return $data;
+        };
 
-        return $this;
+        $next = new Data($this->rawData, $this->extractionLoader, $handlers);
+        $next->extractionLoaded = $this->extractionLoaded;
+        $next->loaded = $this->loaded;
+
+        return $next;
+    }
+
+    public function withoutLoader(): AccessInterface
+    {
+        return $this->withLoader(function ($data) {return $data;});
     }
 
     private function load()
@@ -59,16 +77,7 @@ class Data implements AccessInterface
                 /** @var ResponseInterface $response */
                 $data = $data->wait();
             }
-
-            $data = $this->runResponseHandlers($data);
-            if ($this->extractionLoader instanceof ExtractionLoader) {
-                $data = $this->extractionLoader->extract($data);
-            }
-            $this->data = $data;
-        }
-        if (!$this->loaded && is_callable($this->loader)) {
-            $this->data = call_user_func($this->loader, $this->data);
-            $this->loaded = true;
+            $this->data = $this->runResponseHandlers($data);
         }
 
         return $this->data;

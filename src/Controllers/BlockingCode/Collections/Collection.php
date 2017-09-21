@@ -19,7 +19,7 @@ class Collection implements \IteratorAggregate, \Countable
 
     public function __construct(AccessInterface $rawData, $synchronous = true)
     {
-        $this->rawData = $rawData;
+        $this->rawData = $rawData->withoutLoader();
         $this->synchronous = $synchronous;
     }
 
