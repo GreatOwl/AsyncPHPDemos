@@ -77,20 +77,16 @@ class Data implements AccessInterface
                 /** @var ResponseInterface $response */
                 $data = $data->wait();
             }
-            $this->data = $this->runResponseHandlers($data);
+            $this->data = array_reduce(
+                $this->handlers,
+                function($result, $handler) {
+                    return $handler($result);
+                },
+                $data
+            );
         }
 
         return $this->data;
-    }
-
-    protected function runResponseHandlers($result)
-    {
-        /** @var callable $handler */
-        foreach ($this->handlers as $handler) {
-            $result = $handler($result);
-        }
-
-        return $result;
     }
 
     public function count()
